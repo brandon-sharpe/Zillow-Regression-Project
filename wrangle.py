@@ -159,11 +159,11 @@ def prepare_zillow():
     df[slc] = df[slc].astype(int)
     # converting column data thats categorical into objects so that tgey wont be used in mathmetics
     df.fips = df.fips.astype(object)
-    df.year_built = df.year_built.astype(object)
     df.has_pool=df.has_pool.astype(int)
     counties = {6037: 'LA', 6059: 'Orange', 6111: 'Ventura'}
     df['county'] = df.fips.replace(counties)
     df['tax_rate'] = round((df.tax_amount / df.tax_value) *100,2)
+    
     # train/validate/test split
     train_validate, test = train_test_split(df, test_size=.2, random_state=123)
     train, validate = train_test_split(train_validate, test_size=.3, random_state=123)
