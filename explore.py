@@ -36,7 +36,7 @@ def corr_heatmap(train):
     plt.figure(figsize=(8, 12))
     heatmap = sns.heatmap(train.drop(columns=[
                                               'tax_rate']).corr()[['tax_value']].sort_values(by='tax_value',
-                                                                                                          ascending=False), vmin=-1, vmax=1, annot=True, cmap='BrBG')
+                                                                                                          ascending=False), vmin=-1, vmax=1, annot=True, cmap='Blues')
     heatmap.set_title('Features Correlating with Tax Value', fontdict={'fontsize':18}, pad=16);
 
 

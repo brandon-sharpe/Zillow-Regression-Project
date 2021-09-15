@@ -28,7 +28,7 @@
         - Changing any values moving foward
         - making columns readable
         - spliting data into train test and validate
-        - creating a function for scaling my data 
+        - creating a function for scaling my data (I use anything with a zscore less than 3 and throw out the rest. This keeps 97% of my data) 
         
 ***
 ## Data Exploration
@@ -37,41 +37,42 @@
 
 * Think about the following in this stage:
 
-    - Run at least 1 t-test and 1 correlation test (but as many as you need!)
+    - I've found that there is not enough data in fireplace or air conditioning to use them as features 
 
-    - Visualize all combinations of variables in some way(s).
+    - I like SQFT, Bathrooms, Bedrooms, Pool and year built as features. 
 
-    - What independent variables are correlated with the dependent?
-
-    - Which independent variables are correlated with other independent variables?
 ***
 ## Modeling
 
 Goal: develop a regression model that performs better than a baseline.
 
-Think about the following in this stage:
+2nd Degree polynomial was by far the best perfoming model. Given more time I would love to further feture engineer to make this a more reliable model.
+   * RSME of 310069
+   * $R^2$ of .36
+   * Beats baseline RSME of 378,000
+   
+*** 
+## Data Dictionary
 
-Extablishing and evaluating a baseline model and showing how the model you end up with performs better.
+| Feature           | Datatype                | Definition   |
+|:------------------|:------------------------|:-------------|
+| sqft              | 15189 non-null: int64   |Calculated Square footage of residence |
+| bathrooms         | 15189 non-null: float64 |Number of bathrooms in residence   |
+| bedrooms          | 15189 non-null: int64   |Number of Bedrooms in residence |
+| has_pool          | 15189 non-null: int64   |Does the Residence have a pool: 0= no, 1=yes|
+| tax_value         | 15189 non-null: int64   |The estimated value of the home|
+| year_built        | 15189 non-null: float64 |The year the home was built |
+| tax_amount        | 15189 non-null: float64 |The amount of taxes payed the previous year (2016) |
+| fips              | 15189 non-null: object  |County code resident resides within: 6037 = LA, 6059 = Orange, 6111 = Ventura|
+| county            | 15189 non-null: object  |County the resident resides|
+| tax_rate          | 15189 non-null: float64 |The tax rate the resident was charged at|
+| sqft_scaled       | 15189 non-null: float64 |sqft scaled using minmax scaler|
+| bedrooms_scaled   | 15189 non-null: float64 |number of bedrooms scaled using minmax scaler |
+| bathrooms_scaled  | 15189 non-null: float64 |number of bathrooms scaled using minmax scaler |
+| year_built_scaled | 15189 non-null: float64 |year the house was built scaled using minmax scaler|
 
-Documenting various algorithms and/or hyperparameters you tried along with the evaluation code and results in your notebook before settling on the best algorithm.
+***
+## Given more time 
 
-Evaluating your model using the standard techniques: plotting the residuals, computing the evaluation metrics (SSE, RMSE, and/or MSE), comparing to baseline, plotting 
-y
- by 
-^
-y
-.
-
-For some additional options see sklearn's linear models and sklearn's page on supervised learning.
-
-After developing a baseline model, you could do some feature engineering and answer questions like:
-
-Which features should be included in your model?
-
-Are there new features you could create based on existing features that might be helpful?
-
-Are there any features that aren't adding much value?
-
-Here you could also use automated feature selection techniques to determine which features to put into your model.
-
-You should make sure that any transformation that you apply to your training dataframe are reproducible, that is, the same transformations can be applied to your test dataset.
+I'd love to explore the effect of lat and lon on the Data
+Eclore seperating the data set into larger and smaller priced houses and create a different model for each. 
