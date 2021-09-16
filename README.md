@@ -76,3 +76,6 @@ Goal: develop a regression model that performs better than a baseline.
 
 I'd love to explore the effect of lat and lon on the Data
 Eclore seperating the data set into larger and smaller priced houses and create a different model for each. 
+
+## Link to presentation
+https://www.canva.com/design/DAEqBSy41ok/yq0EQrzI0MDrYdYxmmOMEA/view?utm_content=DAEqBSy41ok&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton
